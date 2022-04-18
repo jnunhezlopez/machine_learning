@@ -29,11 +29,11 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
                     marker=markers[idx], label=cl)
 def RGBtocsv():
     
-    ubaux = "C:/Users/Usuario/Documents/SEA6/programacion/python/machine_learning"
-    # ubaux="I:\documents_Virtual\PROGRAMACION Y PROTOTIPOS\python\machine_learning"
+    # ubaux = "C:/Users/Usuario/Documents/SEA6/programacion/python/machine_learning"
+    ubaux="I:\documents_Virtual\PROGRAMACION Y PROTOTIPOS\python\machine_learning"
     arr=np.loadtxt(ubaux + "/{}RGB".format("recorte"))
     valores=['M','N','R','H','N','H','R','M','R','M','M','H','H','H','H','R']
-    dict={'H':0, 'R':1, 'M':2, 'N':3}
+    dict={'R':0, 'N':1, 'H':2, 'M':3}
     arr1 = np.empty([16384,4])
     i=0
     j=0
