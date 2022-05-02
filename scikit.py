@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Perceptron
 from matplotlib.colors import ListedColormap
-def plot_decision_regions(X, y, classifier, test_idx = None, resolution=0.2):
+def plot_decision_regions(X, y, classifier, test_idx = None, resolution=1.0):
     markers=('s', 'x', 'o', '^', 'v')
     # colors = ('red', 'blue', 'lightgreen', 'gray', 'cyan')
     colors = ('red', 'black', 'yellow', 'gray', 'cyan')
@@ -31,19 +31,19 @@ def plot_decision_regions(X, y, classifier, test_idx = None, resolution=0.2):
         ax.scatter(xs=X[y==cl, 0], ys=X[y==cl, 1], zs=X[y==cl, 2],
                     alpha=0.8, c=cmap(idx),
                     marker=markers[idx], label=cl)
-        if test_idx:
-            X_test, y_test = X[test_idx, :], y[test_idx]
-            ax.scatter(X_test[:,0], X_test[:,1],X_test[:,2], facecolors='none',
-                edgecolors='b', alpha=1.0, linewidths=1, marker='o', s=55, 
-                label='test set')
+    if test_idx:
+        X_test, y_test = X[test_idx, :], y[test_idx]
+        ax.scatter(X_test[:,0], X_test[:,1],X_test[:,2], facecolors='none',
+            edgecolors='g', alpha=1.0, linewidths=1, marker='o', s=55, 
+            label='test set')
     ax.set_xlabel('R')
     ax.set_ylabel('G')
     ax.set_zlabel('B')
 def RGBtocsv():
     
-    ubaux = "C:/Users/Usuario/Documents/SEA6/python/machine_learning"
+    # ubaux = "C:/Users/Usuario/Documents/SEA6/python/machine_learning"
     
-    # ubaux="I:\documents_Virtual\PROGRAMACION Y PROTOTIPOS\python\machine_learning"
+    ubaux="I:\documents_Virtual\PROGRAMACION Y PROTOTIPOS\python\machine_learning"
     arr=np.loadtxt(ubaux + "/{}RGB".format("recorte"))
     valores=['M','N','R','H','N','H','R','M','R','M','M','H','H','H','H','R']
     dict={'R':0, 'N':1, 'H':2, 'M':3}
@@ -75,6 +75,7 @@ if __name__ =='__main__':
     X_test_std = sc.transform(X_test)
     ppn=Perceptron(max_iter=40, eta0=0.1, random_state=0)
     ppn.fit(X_train_std, y_train)
+    
     y_pred = ppn.predict(X_test_std)
     # print('Misclassified samples: %d' % (y_test != y_pred).sum())
     X_combined_std = np.vstack((X_train_std, X_test_std))
